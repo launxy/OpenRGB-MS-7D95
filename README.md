@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="msi-mystic-ms7d95/icons/msi-mystic.svg" width="128" alt="MSI Mystic icon" />
+</p>
 
 
 # OpenRGB-MS-7D95
