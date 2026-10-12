@@ -1,10 +1,9 @@
-<p align="center">
+<div align="center">
   <img src="msi-mystic-ms7d95/icons/msi-mystic.svg" width="128" alt="MSI Mystic icon" />
-</p>
+  <h1>OpenRGB-MS-7D95</h1>
+  <h3>MSI Mystic Light on Linux — PRO B550M-P GEN3 (MS-7D95)</h3>
+</div>
 
-
-# OpenRGB-MS-7D95
-# MSI Mystic Light on Linux — PRO B550M-P GEN3 (MS-7D95)
 
 App to control the Mystic Light colors of the **MSI PRO B550M-P GEN3 (MS-7D95)**
 motherboard on Linux (developed and tested on CachyOS), talking directly to
