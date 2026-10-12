@@ -1,0 +1,12 @@
+[Unit]
+Description=Restaura color Mystic Light MSI MS-7D95 al arrancar
+After=multi-user.target
+
+[Service]
+Type=oneshot
+# Ajusta el color a tu gusto. Este ejemplo fija verde.
+ExecStart=@@APP_DIR@@/msi-mystic set --color 00E676
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

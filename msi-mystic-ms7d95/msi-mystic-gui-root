@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Helper root para el lanzador grafico (pkexec, sin terminal).
+# Reconstruye el acceso al display Wayland del usuario que invoco pkexec.
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -x "$DIR/.venv/bin/python" ]]; then
+  PY="$DIR/.venv/bin/python"
+else
+  PY="python3"
+fi
+export PYTHONPATH="$DIR:${PYTHONPATH:-}"
+_uid="${PKEXEC_UID:-${SUDO_UID:-1000}}"
+export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$_uid}"
+export DISPLAY="${DISPLAY:-:1}"
+export QT_QPA_PLATFORM="${QT_QPA_PLATFORM:-wayland}"
+exec "$PY" -m msi_mystic.gui "$@"

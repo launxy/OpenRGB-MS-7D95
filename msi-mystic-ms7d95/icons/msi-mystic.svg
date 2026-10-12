@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#00e676" stop-opacity=".5"/>
+      <stop offset="60%" stop-color="#00e676" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5f8f"/>
+      <stop offset=".5" stop-color="#8b7bff"/>
+      <stop offset="1" stop-color="#38e1ff"/>
+    </linearGradient>
+    <linearGradient id="socket" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a4a55"/>
+      <stop offset="1" stop-color="#232329"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="26" r="24" fill="url(#glow)"/>
+  <path d="M32 6c-9.9 0-17 7.2-17 16.4 0 6.3 3.6 10.6 7.3 13.4 1.6 1.2 2.7 2.3 2.7 4v2h14v-2c0-1.7 1.1-2.8 2.7-4 3.7-2.8 7.3-7.1 7.3-13.4C49 13.2 41.9 6 32 6z" fill="url(#glass)"/>
+  <path d="M22.5 20.5c-1.6 2.8-1 5.3.6 7.6" stroke="#ffffff" stroke-opacity=".45" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <rect x="25" y="43" width="14" height="4.6" rx="2.3" fill="url(#socket)"/>
+  <rect x="26.5" y="49" width="11" height="4.2" rx="2.1" fill="url(#socket)"/>
+  <rect x="28.5" y="54.6" width="7" height="3.4" rx="1.7" fill="#63636e"/>
+</svg>

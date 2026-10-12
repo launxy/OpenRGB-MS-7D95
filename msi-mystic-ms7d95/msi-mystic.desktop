@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=MSI Mystic Light (MS-7D95)
+Comment=Control RGB para MSI PRO B550M-P GEN3 en Linux
+Exec=@@APP_DIR@@/msi-mystic --gui
+Icon=msi-mystic
+Terminal=true
+StartupNotify=true
+Categories=Settings;HardwareSettings;
+Keywords=MSI;Mystic Light;RGB;placa base;

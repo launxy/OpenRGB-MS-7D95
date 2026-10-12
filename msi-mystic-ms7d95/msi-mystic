@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Lanzador CLI/GUI. Usa el venv si existe, si no python3 del sistema.
+# El GUI necesita root (/dev/port) + acceso al display Wayland/X11.
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -x "$DIR/.venv/bin/python" ]]; then
+  PY="$DIR/.venv/bin/python"
+else
+  PY="python3"
+fi
+export PYTHONPATH="$DIR:${PYTHONPATH:-}"
+if [[ "${1:-}" == "--gui" ]]; then
+  shift
+  if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+    # Re-eleva conservando el display. En niri/Wayland preferimos Qt Wayland
+    # para no depender del plugin xcb (que pide libxcb-cursor) ni de Xauth.
+    : "${WAYLAND_DISPLAY:=wayland-1}"
+    : "${XDG_RUNTIME_DIR:=/run/user/$(id -u)}"
+    : "${DISPLAY:=:1}"
+    export QT_QPA_PLATFORM="${QT_QPA_PLATFORM:-wayland}"
+    exec sudo WAYLAND_DISPLAY="$WAYLAND_DISPLAY" \
+      XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" \
+      DISPLAY="$DISPLAY" \
+      XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" \
+      QT_QPA_PLATFORM="$QT_QPA_PLATFORM" \
+      PYTHONPATH="$PYTHONPATH" \
+      "$PY" -m msi_mystic.gui "$@"
+  fi
+  # Ya somos root (p. ej. via pkexec): reconstruye el display si sudo lo borro.
+  if [[ -z "${WAYLAND_DISPLAY:-}" || -z "${XDG_RUNTIME_DIR:-}" ]]; then
+    _uid="${SUDO_UID:-1000}"
+    export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}"
+    export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$_uid}"
+    export QT_QPA_PLATFORM="${QT_QPA_PLATFORM:-wayland}"
+  fi
+  exec "$PY" -m msi_mystic.gui "$@"
+fi
+exec "$PY" -m msi_mystic "$@"
